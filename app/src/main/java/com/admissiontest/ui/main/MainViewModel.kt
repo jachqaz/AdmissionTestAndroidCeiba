@@ -12,7 +12,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val mainUseCase: MainUseCase) : BaseViewModel() {
     var liveDataUser = MutableLiveData<List<User>?>()
-
+    var users = arrayListOf<User>()
+    var usersSearch = arrayListOf<User>()
     fun getList() {
         viewModelScope.launch {
             liveDataUser.value = mainUseCase.getUsers()
