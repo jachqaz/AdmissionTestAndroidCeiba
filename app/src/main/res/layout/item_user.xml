@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:holder="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/cardViewMargin"
+            android:layout_marginTop="@dimen/cardViewMargin"
+            android:layout_marginBottom="30dp"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9">
+
+        <LinearLayout
+                android:layout_margin="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvName"
+                    holder:text="Name"/>
+            <TextView
+                    android:drawableStart="@drawable/ic_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvPhone"
+                    holder:text="1234567890"/>
+            <TextView
+                    android:drawableStart="@android:drawable/sym_action_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_email"
+                    holder:text="1234567890"/>
+            <TextView
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="end"
+                    android:clickable="true"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvPost"
+                    android:text="@string/show_publications" android:focusable="true"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
