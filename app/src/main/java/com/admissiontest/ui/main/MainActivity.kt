@@ -17,6 +17,13 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         super.initView()
         activityLoginBinding = this.binding as ActivityMainBinding
+        initLiveData()
         mainViewModel.getList()
+    }
+
+    private fun initLiveData() {
+        mainViewModel.liveDataUser.observe(this) {
+            activityLoginBinding.text.text = it?.get(0)?.name ?: ""
+        }
     }
 }
