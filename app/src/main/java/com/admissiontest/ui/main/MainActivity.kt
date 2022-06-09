@@ -1,5 +1,6 @@
 package com.admissiontest.ui.main
 
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
 import com.admissiontest.R
@@ -23,17 +24,22 @@ class MainActivity : BaseActivity(), MainAdapter.PostListener {
         activityMainBinding = this.binding as ActivityMainBinding
         initLiveData()
         initBinding()
-        mainViewModel.getList()
+        mainViewModel.getUsers()
     }
 
     private fun initBinding() {
         activityMainBinding.etSearch.doOnTextChanged { text, _, _, _ ->
             usersSearch = users.filter { user ->
                 text?.let {
-                    user.name.split(" ").first().contains(it)
+                    user.name.split(" ").first().lowercase().contains(it)
                 } == true
             } as ArrayList<User>
             activityMainBinding.rvUser.adapter = MainAdapter(usersSearch, this)
+            if (usersSearch.isEmpty()) {
+                activityMainBinding.tvListEmpty.visibility = View.VISIBLE
+            } else {
+                activityMainBinding.tvListEmpty.visibility = View.GONE
+            }
         }
     }
 
@@ -44,9 +50,13 @@ class MainActivity : BaseActivity(), MainAdapter.PostListener {
                 activityMainBinding.rvUser.adapter = MainAdapter(users, this)
             }
         }
+        mainViewModel.liveDataPost.observe(this) { data ->
+            if (data != null) {
+            }
+        }
     }
 
     override fun goToPostListener(user: User) {
-//        TODO("Not yet implemented")
+        mainViewModel.findPost(user.id)
     }
 }

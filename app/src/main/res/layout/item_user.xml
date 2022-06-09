@@ -18,6 +18,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
             <TextView
+                    android:textColor="@color/primaryColor"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -36,6 +37,7 @@
                     android:id="@+id/tv_email"
                     holder:text="1234567890"/>
             <TextView
+                    android:textColor="@color/primaryColor"
                     android:layout_marginBottom="10dp"
                     android:layout_gravity="end"
                     android:clickable="true"
