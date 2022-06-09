@@ -10,7 +10,7 @@ import com.admissiontest.ui.common.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity(), MainAdapter.PostListener {
+class MainActivity : BaseActivity(), MainUserAdapter.PostListener {
     private val mainViewModel: MainViewModel by viewModels()
     lateinit var activityMainBinding: ActivityMainBinding
     private var users = arrayListOf<User>()
@@ -34,7 +34,7 @@ class MainActivity : BaseActivity(), MainAdapter.PostListener {
                     user.name.split(" ").first().lowercase().contains(it)
                 } == true
             } as ArrayList<User>
-            activityMainBinding.rvUser.adapter = MainAdapter(usersSearch, this)
+            activityMainBinding.rvUser.adapter = MainUserAdapter(this, usersSearch)
             if (usersSearch.isEmpty()) {
                 activityMainBinding.tvListEmpty.visibility = View.VISIBLE
             } else {
@@ -47,11 +47,13 @@ class MainActivity : BaseActivity(), MainAdapter.PostListener {
         mainViewModel.liveDataUser.observe(this) { data ->
             if (data != null) {
                 users.addAll(data)
-                activityMainBinding.rvUser.adapter = MainAdapter(users, this)
+                usersSearch.addAll(data)
+                activityMainBinding.rvUser.adapter = MainUserAdapter(this, usersSearch)
             }
         }
         mainViewModel.liveDataPost.observe(this) { data ->
             if (data != null) {
+                activityMainBinding.rvUser.adapter = MainUserAdapter(this, usersSearch, data)
             }
         }
     }

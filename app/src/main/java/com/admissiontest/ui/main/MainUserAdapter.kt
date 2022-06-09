@@ -4,14 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.admissiontest.databinding.ItemUserBinding
+import com.admissiontest.domain.model.Post
 import com.admissiontest.domain.model.User
 
 
-class MainAdapter(
-    private val dataSet: List<User>,
-    private val listener: PostListener
+class MainUserAdapter(
+    private val listener: PostListener,
+    private val dataSetUser: List<User>,
+    private val dataSetPost: List<Post> = listOf(),
 ) :
-    RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+    RecyclerView.Adapter<MainUserAdapter.ViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -22,13 +25,14 @@ class MainAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind()
-        holder.binding.tvName.text = dataSet[position].name
-        holder.binding.tvPhone.text = dataSet[position].phone
-        holder.binding.tvEmail.text = dataSet[position].email
+        holder.binding.tvName.text = dataSetUser[position].name
+        holder.binding.tvPhone.text = dataSetUser[position].phone
+        holder.binding.tvEmail.text = dataSetUser[position].email
+        holder.binding.rvPosts.adapter = MainPostAdapter(dataSetPost)
     }
 
     override fun getItemCount(): Int {
-        return dataSet.size
+        return dataSetUser.size
     }
 
     interface PostListener {
@@ -40,7 +44,7 @@ class MainAdapter(
         fun bind() {
             binding.executePendingBindings()
             binding.tvPost.setOnClickListener {
-                listener.goToPostListener(dataSet[adapterPosition])
+                listener.goToPostListener(dataSetUser[adapterPosition])
             }
         }
     }
