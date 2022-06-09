@@ -9,6 +9,7 @@ import com.admissiontest.domain.model.User
 import com.admissiontest.ui.common.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : BaseActivity(), MainUserAdapter.PostListener {
     private val mainViewModel: MainViewModel by viewModels()
@@ -45,6 +46,7 @@ class MainActivity : BaseActivity(), MainUserAdapter.PostListener {
 
     private fun initLiveData() {
         mainViewModel.liveDataUser.observe(this) { data ->
+            activityMainBinding.progressBar.visibility = View.GONE
             if (data != null) {
                 users.addAll(data)
                 usersSearch.addAll(data)
@@ -53,12 +55,14 @@ class MainActivity : BaseActivity(), MainUserAdapter.PostListener {
         }
         mainViewModel.liveDataPost.observe(this) { data ->
             if (data != null) {
+                activityMainBinding.progressBar.visibility = View.GONE
                 activityMainBinding.rvUser.adapter = MainUserAdapter(this, this, usersSearch, data)
             }
         }
     }
 
     override fun goToPostListener(user: User) {
+        activityMainBinding.progressBar.visibility = View.VISIBLE
         mainViewModel.findPost(user.id)
     }
 }
