@@ -1,14 +1,17 @@
 package com.admissiontest.ui.main
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.admissiontest.R
 import com.admissiontest.databinding.ItemUserBinding
 import com.admissiontest.domain.model.Post
 import com.admissiontest.domain.model.User
 
 
 class MainUserAdapter(
+    private val context: Context,
     private val listener: PostListener,
     private val dataSetUser: List<User>,
     private val dataSetPost: List<Post> = listOf(),
@@ -28,7 +31,15 @@ class MainUserAdapter(
         holder.binding.tvName.text = dataSetUser[position].name
         holder.binding.tvPhone.text = dataSetUser[position].phone
         holder.binding.tvEmail.text = dataSetUser[position].email
-        holder.binding.rvPosts.adapter = MainPostAdapter(dataSetPost)
+        val setPost = dataSetPost.filter { post -> post.userId == dataSetUser[position].id.toInt() }
+        if (setPost.isNotEmpty()) {
+            holder.binding.tvPost.text = context.getString(R.string.hide_publications)
+            holder.binding.tvPost.setOnClickListener {
+                holder.binding.tvPost.text = context.getString(R.string.show_publications)
+                holder.binding.rvPosts.adapter = MainPostAdapter(listOf())
+            }
+        }
+        holder.binding.rvPosts.adapter = MainPostAdapter(setPost)
     }
 
     override fun getItemCount(): Int {

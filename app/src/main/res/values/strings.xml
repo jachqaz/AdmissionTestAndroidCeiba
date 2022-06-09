@@ -2,6 +2,7 @@
     <string name="app_name">Prueba de Ingreso</string>
     <string name="contentDescription">Content Description</string>
     <string name="show_publications">VER PUBLICACIONES</string>
+    <string name="hide_publications">OCULTAR PUBLICACIONES</string>
     <string name="search_user">Buscar usuario</string>
     <string name="list_is_empty">List is empty</string>
 </resources>

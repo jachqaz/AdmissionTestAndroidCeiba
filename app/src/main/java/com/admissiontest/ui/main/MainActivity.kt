@@ -34,7 +34,7 @@ class MainActivity : BaseActivity(), MainUserAdapter.PostListener {
                     user.name.split(" ").first().lowercase().contains(it)
                 } == true
             } as ArrayList<User>
-            activityMainBinding.rvUser.adapter = MainUserAdapter(this, usersSearch)
+            activityMainBinding.rvUser.adapter = MainUserAdapter(this, this, usersSearch)
             if (usersSearch.isEmpty()) {
                 activityMainBinding.tvListEmpty.visibility = View.VISIBLE
             } else {
@@ -48,12 +48,12 @@ class MainActivity : BaseActivity(), MainUserAdapter.PostListener {
             if (data != null) {
                 users.addAll(data)
                 usersSearch.addAll(data)
-                activityMainBinding.rvUser.adapter = MainUserAdapter(this, usersSearch)
+                activityMainBinding.rvUser.adapter = MainUserAdapter(this, this, usersSearch)
             }
         }
         mainViewModel.liveDataPost.observe(this) { data ->
             if (data != null) {
-                activityMainBinding.rvUser.adapter = MainUserAdapter(this, usersSearch, data)
+                activityMainBinding.rvUser.adapter = MainUserAdapter(this, this, usersSearch, data)
             }
         }
     }
