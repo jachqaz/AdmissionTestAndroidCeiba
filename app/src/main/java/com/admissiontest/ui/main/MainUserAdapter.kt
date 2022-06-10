@@ -8,6 +8,7 @@ import com.admissiontest.R
 import com.admissiontest.databinding.ItemUserBinding
 import com.admissiontest.domain.model.Post
 import com.admissiontest.domain.model.User
+import com.google.android.material.textview.MaterialTextView
 
 
 class MainUserAdapter(
@@ -17,7 +18,6 @@ class MainUserAdapter(
     private val dataSetPost: List<Post> = listOf(),
 ) :
     RecyclerView.Adapter<MainUserAdapter.ViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -35,10 +35,6 @@ class MainUserAdapter(
             dataSetPost.filter { post -> post.userId == dataSetUser[position].id?.toInt() }
         if (setPost.isNotEmpty()) {
             holder.binding.tvPost.text = context.getString(R.string.hide_publications)
-            holder.binding.tvPost.setOnClickListener {
-                holder.binding.tvPost.text = context.getString(R.string.show_publications)
-                holder.binding.rvPosts.adapter = MainPostAdapter(listOf())
-            }
         }
         holder.binding.rvPosts.adapter = MainPostAdapter(setPost)
     }
@@ -56,9 +52,18 @@ class MainUserAdapter(
         fun bind() {
             binding.executePendingBindings()
             binding.tvPost.setOnClickListener {
-                listener.goToPostListener(dataSetUser[adapterPosition])
+                if ((it as MaterialTextView).text == HIDE_POST) {
+                    binding.rvPosts.adapter = MainPostAdapter(listOf())
+                    it.text = context.getString(R.string.show_publications)
+                } else {
+                    listener.goToPostListener(dataSetUser[adapterPosition])
+                }
             }
         }
+    }
+
+    companion object {
+        const val HIDE_POST = "OCULTAR PUBLICACIONES"
     }
 
 }
