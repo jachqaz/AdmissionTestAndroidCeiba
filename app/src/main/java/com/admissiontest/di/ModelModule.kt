@@ -1,7 +1,8 @@
 package com.admissiontest.di
 
 
-import com.admissiontest.domain.model.*
+import com.admissiontest.domain.model.Post
+import com.admissiontest.domain.model.User
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,19 +12,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object ModelModule {
-
-    @Singleton
-    @Provides
-    fun provideAddress() = Address()
-
-    @Singleton
-    @Provides
-    fun provideCompany() = Company()
-
-    @Singleton
-    @Provides
-    fun provideGeo() = Geo()
-
     @Singleton
     @Provides
     fun providePost() = Post()

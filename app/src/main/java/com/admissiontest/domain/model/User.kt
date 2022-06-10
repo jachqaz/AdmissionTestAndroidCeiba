@@ -13,10 +13,6 @@ data class User(
     val name: String? = "",
     val username: String? = "",
     val email: String? = "",
-//    @Transient
-//    val address: Address?,
     val phone: String? = "",
     val website: String? = "",
-//    @Transient
-//    val company: Company?
 )
