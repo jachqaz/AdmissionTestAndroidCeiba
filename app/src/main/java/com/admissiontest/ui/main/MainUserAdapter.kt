@@ -31,7 +31,8 @@ class MainUserAdapter(
         holder.binding.tvName.text = dataSetUser[position].name
         holder.binding.tvPhone.text = dataSetUser[position].phone
         holder.binding.tvEmail.text = dataSetUser[position].email
-        val setPost = dataSetPost.filter { post -> post.userId == dataSetUser[position].id.toInt() }
+        val setPost =
+            dataSetPost.filter { post -> post.userId == dataSetUser[position].id?.toInt() }
         if (setPost.isNotEmpty()) {
             holder.binding.tvPost.text = context.getString(R.string.hide_publications)
             holder.binding.tvPost.setOnClickListener {

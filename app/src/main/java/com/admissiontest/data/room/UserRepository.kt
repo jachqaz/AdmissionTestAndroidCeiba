@@ -16,6 +16,7 @@
 
 package com.admissiontest.data.room
 
+import com.admissiontest.domain.model.User
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,6 +30,10 @@ import javax.inject.Singleton
 class UserRepository @Inject constructor(private val userDao: UserDao) {
 
     fun getUsers() = userDao.getAll()
+
+    suspend fun insertAll(users: List<User>) {
+        userDao.insertAll(users)
+    }
 
     companion object {
         // For Singleton instantiation

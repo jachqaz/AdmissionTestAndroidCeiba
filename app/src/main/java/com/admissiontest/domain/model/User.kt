@@ -9,14 +9,14 @@ data class User(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "userId")
     var userId: Long = 0,
-    val id: Int?,
-    val name: String?,
-    val username: String?,
-    val email: String?,
+    val id: Long? = 0,
+    val name: String? = "",
+    val username: String? = "",
+    val email: String? = "",
 //    @Transient
 //    val address: Address?,
-    val phone: String?,
-    val website: String?,
+    val phone: String? = "",
+    val website: String? = "",
 //    @Transient
 //    val company: Company?
 )

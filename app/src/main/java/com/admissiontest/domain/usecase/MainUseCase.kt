@@ -11,13 +11,12 @@ class MainUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
     suspend fun getUsers(): List<User>? {
-        var users = userRepository.getUsers()
-        return mainApi.getUsers().body()
-
-//        if(users.isEmpty()){
-//        }else {
-//            return mainApi.getUsers().body()
-//        }
+        return if (userRepository.getUsers().isEmpty()) {
+            mainApi.getUsers().body()?.let { userRepository.insertAll(it) }
+            mainApi.getUsers().body()
+        } else {
+            userRepository.getUsers()
+        }
     }
 
     suspend fun getPosts(): List<Post>? {

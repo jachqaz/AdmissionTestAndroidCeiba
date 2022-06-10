@@ -32,7 +32,7 @@ class MainActivity : BaseActivity(), MainUserAdapter.PostListener {
         activityMainBinding.etSearch.doOnTextChanged { text, _, _, _ ->
             usersSearch = users.filter { user ->
                 text?.let {
-                    user.name.split(" ").first().lowercase().contains(it)
+                    user.name?.split(" ")?.first()?.lowercase()?.contains(it)
                 } == true
             } as ArrayList<User>
             activityMainBinding.rvUser.adapter = MainUserAdapter(this, this, usersSearch)
@@ -63,6 +63,6 @@ class MainActivity : BaseActivity(), MainUserAdapter.PostListener {
 
     override fun goToPostListener(user: User) {
         activityMainBinding.progressBar.visibility = View.VISIBLE
-        mainViewModel.findPost(user.id)
+        user.id?.let { mainViewModel.findPost(it) }
     }
 }

@@ -1,16 +1,14 @@
 package com.admissiontest.data.room
 
 import android.content.Context
-import androidx.databinding.adapters.Converters
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import com.admissiontest.domain.model.Post
 import com.admissiontest.domain.model.User
+import com.admissiontest.utils.DATABASE_NAME
 
 @Database(entities = [User::class, Post::class], version = 1, exportSchema = false)
-@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun postDao(): PostDao
@@ -28,7 +26,10 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, "database.db").build()
+            return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
+                .addCallback(object : RoomDatabase.Callback() {})
+                .allowMainThreadQueries()
+                .build()
         }
     }
 }

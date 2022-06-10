@@ -9,7 +9,7 @@ data class Company(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var companyId: Long = 0,
-    val name: String?,
-    val catchPhrase: String?,
-    val bs: String?
+    val name: String? = "",
+    val catchPhrase: String? = "",
+    val bs: String? = ""
 )

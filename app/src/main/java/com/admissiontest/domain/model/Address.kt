@@ -9,10 +9,10 @@ data class Address(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var addressId: Long = 0,
-    val street: String?,
-    val suite: String?,
-    val city: String?,
-    val zipcode: String?,
+    val street: String? = "",
+    val suite: String? = "",
+    val city: String? = "",
+    val zipcode: String? = "",
 //    @Transient
 //    val geo: Geo?,
 )

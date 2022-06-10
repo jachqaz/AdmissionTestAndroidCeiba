@@ -9,6 +9,6 @@ data class Geo(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var geoId: Long = 0,
-    val lat: String?,
-    val lng: String?
+    val lat: String? = "",
+    val lng: String? = ""
 )
