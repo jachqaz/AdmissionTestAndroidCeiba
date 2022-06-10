@@ -15,5 +15,5 @@ interface PostDao {
     fun findByUserId(userId: Int): List<Post>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(plants: List<Post>)
+    suspend fun insertAll(posts: List<Post>)
 }
